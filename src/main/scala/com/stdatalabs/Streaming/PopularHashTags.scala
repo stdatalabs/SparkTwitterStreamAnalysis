@@ -1,4 +1,4 @@
-package org.stdatalabs.TwitterPopularHashTags
+package com.stdatalabs.Streaming
 
 import org.apache.spark.streaming.{ Seconds, StreamingContext }
 import org.apache.spark.SparkContext._
