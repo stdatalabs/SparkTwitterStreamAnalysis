@@ -4,8 +4,7 @@ target/
 .classpath
 .cache-main
 .cache-tests
-.settings
-.project
+
 tweets.txt
 # Compiled source #
 ###################
