@@ -14,10 +14,10 @@ import org.apache.spark.streaming.{ Seconds, StreamingContext }
   val sc = new SparkContext(conf)  
   def main(args: Array[String]) {  
    sc.setLogLevel("WARN")  
-   System.setProperty("twitter4j.oauth.consumerKey", "<-- paste consumer key here -->")  
-   System.setProperty("twitter4j.oauth.consumerSecret", "<-- paste consumer secret here -->")  
-   System.setProperty("twitter4j.oauth.accessToken", "<-- paste access token here -->")  
-   System.setProperty("twitter4j.oauth.accessTokenSecret", "<-- paste access token here -->") 
+   System.setProperty("twitter4j.oauth.consumerKey", "ep3OXmXydVoehrDfCZPxh6b7P")  
+   System.setProperty("twitter4j.oauth.consumerSecret", "upssXvwVjOoLxfAUYJiM3sF3ydgh7BSsJOBfVE40iJ5h4BcaWx")  
+   System.setProperty("twitter4j.oauth.accessToken", "140494769-ppQkBGw1q0jDLFXftKR7hjQXr4oQ9XavTWmZrX6w")  
+   System.setProperty("twitter4j.oauth.accessTokenSecret", "nEbsCoqesnOjSxMXyzMlyB4X53eVwOmPBkgVdYwwu6wFx") 
 
    // Set the Spark StreamingContext to create a DStream for every 5 seconds
    val ssc = new StreamingContext(sc, Seconds(5))  
