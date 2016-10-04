@@ -23,16 +23,21 @@ object KafkaSparkPopularHashTags {
 
     sc.setLogLevel("WARN")
 
+    // Create an array of arguments: zookeeper hostname/ip,consumer group, topicname, num of threads   
     val Array(zkQuorum, group, topics, numThreads) = args
 
+    // Set the Spark StreamingContext to create a DStream for every 2 seconds  
     val ssc = new StreamingContext(sc, Seconds(2))
     ssc.checkpoint("checkpoint")
 
+    // Map each topic to a thread  
     val topicMap = topics.split(",").map((_, numThreads.toInt)).toMap
+    // Map value from the kafka message (k, v) pair      
     val lines = KafkaUtils.createStream(ssc, zkQuorum, group, topicMap).map(_._2)
-
+    // Filter hashtags
     val hashTags = lines.flatMap(_.split(" ")).filter(_.startsWith("#"))
 
+    // Get the top hashtags over the previous 60/10 sec window   
     val topCounts60 = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(60))
       .map { case (topic, count) => (count, topic) }
       .transform(_.sortByKey(false))
@@ -40,7 +45,7 @@ object KafkaSparkPopularHashTags {
     val topCounts10 = hashTags.map((_, 1)).reduceByKeyAndWindow(_ + _, Seconds(10))
       .map { case (topic, count) => (count, topic) }
       .transform(_.sortByKey(false))
-      
+
     lines.print()
 
     // Print popular hashtags
