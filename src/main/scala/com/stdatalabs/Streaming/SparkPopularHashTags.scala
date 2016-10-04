@@ -9,7 +9,7 @@ import org.apache.spark.{ SparkContext, SparkConf }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.flume._
 
-object PopularHashTags {
+object SparkPopularHashTags {
   val conf = new SparkConf().setMaster("local[4]").setAppName("Spark Streaming - PopularHashTags")
   val sc = new SparkContext(conf)
 
