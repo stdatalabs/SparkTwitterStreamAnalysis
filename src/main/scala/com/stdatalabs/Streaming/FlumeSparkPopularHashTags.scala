@@ -9,6 +9,16 @@ import org.apache.spark.{ SparkContext, SparkConf }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.flume._
 
+/**
+ * A Spark Streaming - Flume integration to find Popular hashtags from twitter
+ * It receives events from a Flume source that connects to twitter and pushes 
+ * tweets as avro events to sink.
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
+ */
+
 object FlumeSparkPopularHashTags {
   val conf = new SparkConf().setMaster("local[6]").setAppName("Spark Streaming - Flume Source - PopularHashTags")
   val sc = new SparkContext(conf)
@@ -18,7 +28,7 @@ object FlumeSparkPopularHashTags {
     val ssc = new StreamingContext(sc, Seconds(5))
     val filter = args.takeRight(args.length)
 
-    // Create stream using FlumeUtils to receive data from flume at hostname: quickstart.cloudera and port: 9988  
+    // Create stream using FlumeUtils to receive data from flume at hostname: <hostname> and port: <port>  
     val stream = FlumeUtils.createStream(ssc, "ubuntu", 9988)
     val tweets = stream.map(e => new String(e.event.getBody.array))
     tweets.print()

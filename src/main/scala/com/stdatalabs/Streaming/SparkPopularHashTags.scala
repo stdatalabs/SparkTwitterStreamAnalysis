@@ -9,6 +9,23 @@ import org.apache.spark.{ SparkContext, SparkConf }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.streaming.flume._
 
+/**
+ * A Spark Streaming application that receives tweets on certain 
+ * keywords from twitter datasource and find the popular hashtags
+ * 
+ * Arguments: <comsumerKey> <consumerSecret> <accessToken> <accessTokenSecret> <keyword_1> ... <keyword_n>
+ * <comsumerKey>				- Twitter consumer key 
+ * <consumerSecret>  		- Twitter consumer secret
+ * <accessToken>				- Twitter access token
+ * <accessTokenSecret>	- Twitter access token secret
+ * <keyword_1>					- The keyword to filter tweets
+ * <keyword_n>					- Any number of keywords to filter tweets
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
+ */
+
 object SparkPopularHashTags {
   val conf = new SparkConf().setMaster("local[4]").setAppName("Spark Streaming - PopularHashTags")
   val sc = new SparkContext(conf)

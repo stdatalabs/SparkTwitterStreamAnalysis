@@ -14,6 +14,23 @@ import org.apache.spark.streaming._
 import org.apache.spark.{ SparkContext, SparkConf }
 import org.apache.spark.storage.StorageLevel
 
+/**
+ * A Spark Streaming - Kafka integration to receive twitter data from kafka 
+ * topic and find the popular hashtags and also ensure at-least once semantics
+ * i.e, zero data loss
+ * 
+ * Arguments: <zkQuorum> <consumer-group> <topics> <numThreads>
+ * <zkQuorum> 					 - The zookeeper hostname
+ * <consumer-group>      - The Kafka consumer group
+ * <topics>              - The kafka topic to subscribe to
+ * <numThreads>          - Number of kafka receivers to run in parallel
+ * <checkpointDirectory> - The directory to store and retrieve checkpoint data
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
+ */
+
 object RecoverableKafkaPopularHashTags {
 
   def createContext(zkQuorum: String, group: String, topics: String, numThreads: String, checkpointDirectory: String): StreamingContext = {

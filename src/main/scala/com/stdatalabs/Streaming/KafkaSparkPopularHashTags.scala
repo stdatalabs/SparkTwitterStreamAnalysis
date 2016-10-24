@@ -14,6 +14,21 @@ import org.apache.spark.streaming._
 import org.apache.spark.{ SparkContext, SparkConf }
 import org.apache.spark.storage.StorageLevel
 
+/**
+ * A Spark Streaming - Kafka integration to receive twitter 
+ * data from kafka topic and find the popular hashtags
+ * 
+ * Arguments: <zkQuorum> <consumer-group> <topics> <numThreads>
+ * <zkQuorum>       - The zookeeper hostname
+ * <consumer-group> - The Kafka consumer group
+ * <topics>         - The kafka topic to subscribe to
+ * <numThreads>     - Number of kafka receivers to run in parallel
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
+ */
+
 object KafkaSparkPopularHashTags {
 
   val conf = new SparkConf().setMaster("local[6]").setAppName("Spark Streaming - Kafka Producer - PopularHashTags").set("spark.executor.memory", "1g")

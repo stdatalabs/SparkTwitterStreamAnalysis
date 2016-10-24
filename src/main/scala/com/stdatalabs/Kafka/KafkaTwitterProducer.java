@@ -21,6 +21,24 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import kafka.producer.KeyedMessage;
 
+/**
+ * A Kafka Producer that gets tweets on certain keywords
+ * from twitter datasource and publishes to a kafka topic
+ * 
+ * Arguments: <comsumerKey> <consumerSecret> <accessToken> <accessTokenSecret> <topic-name> <keyword_1> ... <keyword_n>
+ * <comsumerKey>		- Twitter consumer key 
+ * <consumerSecret>  	- Twitter consumer secret
+ * <accessToken>		- Twitter access token
+ * <accessTokenSecret>	- Twitter access token secret
+ * <topic-name>			- The kafka topic to subscribe to
+ * <keyword_1>			- The keyword to filter tweets
+ * <keyword_n>			- Any number of keywords to filter tweets
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
+ */
+
 public class KafkaTwitterProducer {
 	public static void main(String[] args) throws Exception {
 		final LinkedBlockingQueue<Status> queue = new LinkedBlockingQueue<Status>(1000);

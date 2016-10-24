@@ -18,10 +18,18 @@ import org.apache.spark.storage.StorageLevel
 import _root_.kafka.serializer.StringDecoder
 
 /**
- * Consumes messages from one or more topics in Kafka and finds the popular hashtags.
- * Usage: KafkaDirectPopularHashtags <brokers> <topics>
- *   <brokers> is a list of one or more Kafka brokers
- *   <topics> is a list of one or more kafka topics to consume from
+ * A Spark Streaming - Kafka integration to receive twitter data from 
+ * kafka topic and find the popular hashtags and also ensure exactly once semantics
+ * i.e, process data only once
+ * 
+ * Arguments: <brokers> <topics> <checkpointDir>
+ * <brokers>             -	List of one or more Kafka brokers
+ * <topics>              -	List of one or more kafka topics to consume from
+ * <checkpointDirectory> -  The directory to store and retrieve checkpoint data 
+ * 
+ * More discussion at stdatalabs.blogspot.com
+ * 
+ * @author Sachin Thirumala
  */
 
 object KafkaDirectReciverPopularHashTags {
