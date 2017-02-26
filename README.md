@@ -43,5 +43,5 @@ The source folder is organized into 2 packages i.e. Kafka and Streaming. Each cl
 
 
 
-### More articles on hadoop technology stack at [stdatalabs](stdatalabs.blogspot.com)
+### More articles on hadoop technology stack at [stdatalabs](http://stdatalabs.blogspot.com)
 
